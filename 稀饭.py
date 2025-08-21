@@ -14,7 +14,7 @@ import time
 # ck变量：xfck, 填写上面两种格式ck均可，多号新建变量即可
 # 并发变量：XF_Bf, 设置为True为开启并发，默认关闭
 # 卡密变量：XF_Card 填写购买的卡密即可
-# 延迟变量：XF_DYC 最低延迟，整数(25) | XF_GYC 最高延迟，整数(40)   (默认25-40s)
+# 卡密变量：XF_Yxms 【1】为正常任务，【2】为直接查询收益情况，【3】为导出当日全部账号收益为excel表格，默认1
 
 
 def GET_SO():
@@ -31,7 +31,7 @@ def GET_SO():
     try:
         mirrors = [
             f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/xf_{PythonV}.so',
-            f'https://raw.bgithub.xyz/BIGOSTK/pyso/main/xf_{PythonV}.so'
+            f'https://gh.qninq.cn/https://raw.githubusercontent.com/BIGOSTK/pyso/main/xf_{PythonV}.so'
         ]
 
         last_error = None
@@ -64,7 +64,14 @@ def main():
 
     try:
         import xf
-        xf.main()
+        yxms = os.environ.get('XF_Yxms', '1')
+        yxms = str(yxms)
+        if yxms == '1':
+            xf.main()
+        elif yxms == '2':
+            xf.get_coin()
+        elif yxms == '3':
+            xf.get_excel()
     except ImportError as e:
         print(f'导入xf模块失败: {e}')
     except Exception as e:
