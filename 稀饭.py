@@ -2,6 +2,40 @@ import os
 import urllib.request
 import sys
 import time
+import platform
+
+
+class SystemChecker:
+    @staticmethod
+    def is_linux():
+        return platform.system() == 'Linux'
+
+    @staticmethod
+    def is_amd_architecture():
+        machine = platform.machine().lower()
+        amd_patterns = [
+            'x86_64', 'amd64', 'x86', 'i386', 'i686',
+            'amd', 'intel'
+        ]
+        return any(pattern in machine for pattern in amd_patterns)
+
+    @staticmethod
+    def is_linux_amd():
+        return SystemChecker.is_linux() and SystemChecker.is_amd_architecture()
+
+    @staticmethod
+    def get_detailed_info():
+        return {'os': platform.system(), 'architecture': platform.machine()}
+
+
+checker = SystemChecker()
+
+if checker.is_linux_amd():
+    pass
+else:
+    info = checker.get_detailed_info()
+    print(f'当前系统不支持,当前系统类型: {info["os"]},系统架构: {info["architecture"]}')
+    exit(1)
 
 
 ####################使用教程区####################
