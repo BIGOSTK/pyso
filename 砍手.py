@@ -40,9 +40,11 @@ else:
 
 ####################使用教程区####################
 
+广告类型：1为饭补， 2为看广告，3为看广告得金币，其他值为以上全部执行,默认全部执行
+
 # 抓包 ck和salt
-# 格式1：备注#Cookie#salt
-# 格式2：备注#Cookie#salt#sock5
+# 格式1：备注#Cookie#salt#广告类型(备注#Cookie#salt#1)
+# 格式2：备注#Cookie#salt#广告类型#sock5
 # socks5存在则使用代理，反之
 # socks代理选择参数，可填可不填 格式：ip|port|username|password
 # ck变量：ksjsbck, 填写上面两种格式ck均可，多号新建变量即可
@@ -70,7 +72,7 @@ def GET_SO():
     try:
         mirrors = [
             f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/ksad_{PythonV}.so',
-            f'https://gh.qninq.cn/https://raw.githubusercontent.com/BIGOSTK/pyso/main/ksad_{PythonV}.so'
+            f'https://gh.qninq.cn/https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{PythonV}.so'
         ]
 
         last_error = None
