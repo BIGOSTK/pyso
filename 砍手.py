@@ -7,36 +7,74 @@ import platform
 
 class SystemChecker:
     @staticmethod
-    def is_linux():
-        return platform.system() == 'Linux'
+    def is_arm_architecture():
+        """检测是否为ARM架构"""
+        machine = platform.machine().lower()
+        arm_patterns = [
+            'arm', 'aarch', 'arm64', 'aarch64',
+            'armv7', 'armv8', 'armhf'
+        ]
+        return any(pattern in machine for pattern in arm_patterns)
 
     @staticmethod
     def is_amd_architecture():
+        """检测是否为AMD/x86架构"""
         machine = platform.machine().lower()
         amd_patterns = [
             'x86_64', 'amd64', 'x86', 'i386', 'i686',
-            'amd', 'intel'
+            'amd', 'intel', 'x64'
         ]
         return any(pattern in machine for pattern in amd_patterns)
 
     @staticmethod
-    def is_linux_amd():
-        return SystemChecker.is_linux() and SystemChecker.is_amd_architecture()
+    def is_supported_architecture():
+        """检测是否支持ARM或AMD架构"""
+        return SystemChecker.is_arm_architecture() or SystemChecker.is_amd_architecture()
+
+    @staticmethod
+    def is_linux_supported():
+        """检测是否为Linux且支持ARM或AMD架构"""
+        return SystemChecker.is_supported_architecture()
+
+    @staticmethod
+    def get_architecture_type():
+        """获取具体的架构类型"""
+        if SystemChecker.is_arm_architecture():
+            return 'arm'
+        elif SystemChecker.is_amd_architecture():
+            return 'amd'
+        else:
+            return 'unknown'
 
     @staticmethod
     def get_detailed_info():
-        return {'os': platform.system(), 'architecture': platform.machine()}
+        return {
+            'os': platform.system(),
+            'architecture': platform.machine(),
+            'arch_type': SystemChecker.get_architecture_type()
+        }
 
 
 checker = SystemChecker()
 
-if checker.is_linux_amd():
+if checker.is_linux_supported():
     pass
 else:
     info = checker.get_detailed_info()
     print(f'当前系统不支持,当前系统类型: {info["os"]},系统架构: {info["architecture"]}')
     exit(1)
 
+def get_architecture():
+    """获取系统架构"""
+    arch = platform.machine().lower()
+    if 'arm' in arch or 'aarch' in arch:
+        return 'arm'
+    elif 'x86' in arch or 'amd' in arch or 'i386' in arch or 'i686' in arch:
+        return 'amd'
+    else:
+        return arch
+
+current_arch = get_architecture()
 
 ####################使用教程区####################
 
@@ -71,8 +109,8 @@ def GET_SO():
 
     try:
         mirrors = [
-            f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/ksad_{PythonV}.so',
-            f'https://gh.qninq.cn/https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{PythonV}.so'
+            f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/ksad_{current_arch}_{PythonV}.so',
+            f'https://gh.qninq.cn/https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so'
         ]
 
         last_error = None
