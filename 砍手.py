@@ -111,7 +111,8 @@ def GET_SO():
     try:
         mirrors = [
             f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/ksad_{current_arch}_{PythonV}.so',
-            f'https://gh.qninq.cn/https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so'
+            f'https://gh-proxy.com/https://raw.githubusercontent.com/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so',
+            f'https://raw.githubusercontent.com/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so'
         ]
 
         last_error = None
