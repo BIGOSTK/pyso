@@ -78,8 +78,9 @@ current_arch = get_architecture()
 
 ####################使用教程区####################
 
-#广告类型：1为饭补， 2为看广告，3为宝箱广告，其他值为以上全部执行,默认全部执行
-
+#广告类型：1为饭补， 2为看广告，3为宝箱广告，4为200广(已单独剔出)，其他值为以上全部执行,默认全部执行
+# 广告模式变量：KS_GGMS 默认为1(使用上面广告类型模式)，设置2为使用指定广告类型
+# 广告类型变量：KS_RWLIST 广告模式变量设置为2生效，(默认3和4，只跑宝箱和200广，使用英文逗号隔开，例如:3,4,2，不论顺序)
 # 抓包 ck和salt
 # 格式1：备注#Cookie#salt#广告类型(备注#Cookie#salt#1)
 # 格式2：备注#Cookie#salt#广告类型#sock5
@@ -91,6 +92,7 @@ current_arch = get_architecture()
 # 金币自动兑换变量：KS_JBDH 默认关闭，True开启
 # 自动提现变量：KS_TX 默认关闭，True开启
 # 运行延迟变量：KS_YC 默认30,45，格式为【最低,最高】，中间英文逗号隔开
+# 运行次数变量：KS_YXCS 默认999
 # 金币控制变量：KS_JBMAX 默认500000
 # 广告模式变量：KS_ADMS 默认为1(正常广告)，设置2为追加(理论默认即可)
 # 自动更换did变量：KS_DID 默认关闭，True开启(实测不好用)
@@ -111,8 +113,8 @@ def GET_SO():
     try:
         mirrors = [
             f'https://raw.bgithub.xyz/BIGOSTK/pyso/refs/heads/main/ksad_{current_arch}_{PythonV}.so',
-            f'https://gh-proxy.com/https://raw.githubusercontent.com/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so',
-            f'https://raw.githubusercontent.com/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so'
+            f'https://gh-proxy.com/https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so',
+            f'https://raw.bgithub.xyz/BIGOSTK/pyso/main/ksad_{current_arch}_{PythonV}.so'
         ]
 
         last_error = None
