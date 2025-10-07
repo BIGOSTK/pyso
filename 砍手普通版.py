@@ -83,6 +83,7 @@ current_arch = get_architecture()
 # 抓包 ck和salt
 # 格式1：备注#Cookie#salt#广告类型(备注#Cookie#salt#1,3)
 # 格式2：备注#Cookie#salt#广告类型#sock5
+#广告类型为列表模式，使用英文逗号隔开，填什么就指定跑什么
 # socks5存在则使用代理，反之
 # socks代理选择参数，可填可不填 格式：ip|port|username|password
 # ck变量：ksck, 填写上面两种格式ck均可，多号新建变量即可
@@ -155,3 +156,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
