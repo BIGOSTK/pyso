@@ -2,6 +2,9 @@
     "ksmax": {
         "version": "16.0"
     },
+    "ksmax_exe": {
+        "version": "4.0"
+    },
     "ksp": {
         "version": "1.0"
     },
